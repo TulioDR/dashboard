@@ -5,7 +5,7 @@ import App from "./App";
 import { registerLicense } from "@syncfusion/ej2-base";
 
 // Registering Syncfusion license key
-registerLicense(process.env.REACT_APP_SYNCFUSION_KEY as string);
+registerLicense(process.env.REACT_APP_SYNCFUSION_KEY!);
 
 const root = ReactDOM.createRoot(
    document.getElementById("root") as HTMLElement

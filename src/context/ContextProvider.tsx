@@ -3,18 +3,30 @@ import { createContext, useContext, useState } from "react";
 interface AppContextInterface {
    activeMenu: boolean;
    setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
+   isClicked: isClickedModel;
+   setIsClicked: React.Dispatch<React.SetStateAction<isClickedModel>>;
+   handleClick: (clicked: string) => void;
+   screenSize: number | undefined;
+   setScreenSize: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 const StateContext = createContext({} as AppContextInterface);
-export default function useStateContext() {
+export function useStateContext() {
    return useContext(StateContext);
 }
 
-const initialState = {
+const initialState: isClickedModel = {
    chat: false,
    cart: false,
    userProfile: false,
    notification: false,
 };
+
+interface isClickedModel {
+   chat: boolean;
+   cart: boolean;
+   userProfile: boolean;
+   notification: boolean;
+}
 
 interface Props {
    children: React.ReactNode;
@@ -22,10 +34,21 @@ interface Props {
 
 export const ContextProvider = ({ children }: Props) => {
    const [activeMenu, setActiveMenu] = useState<boolean>(true);
+   const [isClicked, setIsClicked] = useState<isClickedModel>(initialState);
+   const [screenSize, setScreenSize] = useState<number | undefined>(undefined);
 
-   const value = {
+   const handleClick = (clicked: string) => {
+      setIsClicked({ ...initialState, [clicked]: true });
+   };
+
+   const value: AppContextInterface = {
       activeMenu,
       setActiveMenu,
+      isClicked,
+      setIsClicked,
+      handleClick,
+      screenSize,
+      setScreenSize,
    };
    return (
       <StateContext.Provider value={value}>{children}</StateContext.Provider>

@@ -8,6 +8,7 @@ interface AppContextInterface {
    handleClick: (clicked: string) => void;
    screenSize: number | undefined;
    setScreenSize: React.Dispatch<React.SetStateAction<number | undefined>>;
+   initialState: isClickedModel;
 }
 const StateContext = createContext({} as AppContextInterface);
 export function useStateContext() {
@@ -49,6 +50,7 @@ export const ContextProvider = ({ children }: Props) => {
       handleClick,
       screenSize,
       setScreenSize,
+      initialState,
    };
    return (
       <StateContext.Provider value={value}>{children}</StateContext.Provider>

@@ -15,7 +15,7 @@ import {
    stackedPrimaryXAxis,
    stackedPrimaryYAxis,
 } from "../../data/dummy";
-import { useStateContext } from "../../context/ContextProvider";
+// import { useStateContext } from "../../context/ContextProvider";
 
 interface Props {
    currentMode?: any;

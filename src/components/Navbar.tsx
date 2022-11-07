@@ -49,7 +49,6 @@ export default function Navbar() {
       activeMenu,
       setActiveMenu,
       isClicked,
-      setIsClicked,
       handleClick,
       screenSize,
       setScreenSize,
@@ -64,7 +63,7 @@ export default function Navbar() {
       handleResize();
 
       return () => window.removeEventListener("resize", handleResize);
-   }, []);
+   }, [setScreenSize]);
 
    useEffect(() => {
       if (!screenSize) return;
@@ -75,11 +74,13 @@ export default function Navbar() {
       }
    }, [screenSize]);
 
+   const handleActiveMenu = () => setActiveMenu(!activeMenu);
+
    return (
-      <div className="flex justify-between p-2 md:mx-6 relative">
+      <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
          <NavButton
             title="Menu"
-            customFunc={() => setActiveMenu((prev) => !prev)}
+            customFunc={handleActiveMenu}
             color={currentColor}
             icon={<AiOutlineMenu />}
          />
@@ -98,8 +99,8 @@ export default function Navbar() {
                icon={<BsChatLeft />}
             />
             <NavButton
-               title="Notifications"
-               dotColor="#03C9D7"
+               title="Notification"
+               dotColor="rgb(254, 201, 15)"
                customFunc={() => handleClick("notification")}
                color={currentColor}
                icon={<RiNotification3Line />}
@@ -110,9 +111,9 @@ export default function Navbar() {
                   onClick={() => handleClick("userProfile")}
                >
                   <img
-                     alt="profile"
-                     className="rounded-full h-8 w-8"
+                     className="rounded-full w-8 h-8"
                      src={avatar}
+                     alt="user-profile"
                   />
                   <p>
                      <span className="text-gray-400 text-14">Hi,</span>{" "}
@@ -123,6 +124,7 @@ export default function Navbar() {
                   <MdKeyboardArrowDown className="text-gray-400 text-14" />
                </div>
             </TooltipComponent>
+
             {isClicked.cart && <Cart />}
             {isClicked.chat && <Chat />}
             {isClicked.notification && <Notification />}

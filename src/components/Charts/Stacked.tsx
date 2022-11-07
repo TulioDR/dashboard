@@ -18,8 +18,8 @@ import {
 import { useStateContext } from "../../context/ContextProvider";
 
 interface Props {
-   width: string;
-   height: string;
+   width?: string;
+   height?: string;
 }
 
 export default function Stacked({ width, height }: Props) {

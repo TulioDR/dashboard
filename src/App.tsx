@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import { Sidebar, Navbar } from "./components";
+import { Sidebar, Navbar, ThemeSettings } from "./components";
 import {
    Ecommerce,
    Orders,
@@ -26,17 +26,24 @@ import {
 import { useStateContext } from "./context/ContextProvider";
 
 function App() {
-   const { activeMenu } = useStateContext();
+   const {
+      activeMenu,
+      themeSettings,
+      setThemeSettings,
+      currentColor,
+      currentMode,
+   } = useStateContext();
    return (
-      <div>
+      <div className={currentMode === "Dark" ? "dark" : ""}>
          <BrowserRouter>
             <div className="flex relative dark:bg-main-dark-bg">
                <div className="fixed right-4 bottom-4" style={{ zIndex: 1000 }}>
                   <TooltipComponent content="Settings" position="TopCenter">
                      <button
                         type="button"
+                        onClick={() => setThemeSettings(true)}
                         className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white rounded-full"
-                        style={{ background: "blue" }}
+                        style={{ background: currentColor }}
                      >
                         <FiSettings />
                      </button>
@@ -52,7 +59,7 @@ function App() {
                   </div>
                )}
                <div
-                  className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
+                  className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full ${
                      activeMenu ? "md:ml-72 " : "flex-2"
                   }`}
                >
@@ -60,6 +67,7 @@ function App() {
                      <Navbar />
                   </div>
                   <div>
+                     {themeSettings && <ThemeSettings />}
                      <Routes>
                         {/* dashboard  */}
                         <Route path="/" element={<Ecommerce />} />

@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import { Sidebar, Navbar, ThemeSettings } from "./components";
+import { Sidebar, Navbar, ThemeSettings, Footer } from "./components";
 import {
    Ecommerce,
    Orders,
@@ -98,6 +98,7 @@ function App() {
                         <Route path="/stacked" element={<Stacked />} />
                      </Routes>
                   </div>
+                  <Footer />
                </div>
             </div>
          </BrowserRouter>

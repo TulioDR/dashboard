@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
@@ -70,7 +70,10 @@ function App() {
                      {themeSettings && <ThemeSettings />}
                      <Routes>
                         {/* dashboard  */}
-                        <Route path="/" element={<Ecommerce />} />
+                        <Route
+                           path="/"
+                           element={<Navigate to="/ecommerce" />}
+                        />
                         <Route path="/ecommerce" element={<Ecommerce />} />
 
                         {/* pages  */}
